@@ -1,9 +1,9 @@
 public class Main {
     public static void main(String[] args) {
-        // Erstellen Sie ein Objekt der MyQueue-Klasse
+        // Erstelle ein Objekt der MyQueue-Klasse
         MyQueue queue = new MyQueue(5);
 
-        // Versuchen Sie, ein Element aus der Warteschlange zu löschen
+        // Versuche, ein Element aus der Warteschlange zu löschen
         try {
             queue.dequeue();
         } catch (IllegalStateException ex) {
