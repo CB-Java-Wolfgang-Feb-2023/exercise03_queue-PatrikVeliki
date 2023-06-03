@@ -1,48 +1,82 @@
 public class MyQueue {
     private final int SIZE;
-    private int[] queue;
-    private int front, rear;
+    private final int[] queue;
+    private final int front;
+    private int rear;
 
     public MyQueue(int SIZE) {
         this.SIZE = SIZE;
         queue = new int[SIZE];
-        //front = ...
-        //rear = ...
+        front = 0;
+        rear = -1;
     }
 
-    // check if the queue is full
+    // Überprüft, ob die Warteschlange voll ist
     public boolean isFull() {
-        return false;
+        return rear == SIZE - 1;
     }
 
-    // check if the queue is empty
+    // Überprüft, ob die Warteschlange leer ist
     public boolean isEmpty() {
-        return false;
+        return rear == -1;
     }
 
-    // insert elements to the queue
+    // Fügt Elemente zur Warteschlange hinzu
     public void enqueue(int element) {
+        if (isFull()) {
+            throw new IllegalStateException("Queue is full");
+        }
 
+        queue[++rear] = element;
     }
 
-    // delete element from the queue
+    // Löscht Element aus der Warteschlange
     public int dequeue() {
-        return 0;
+        if (isEmpty()) {
+            throw new IllegalStateException("Queue is empty");
+        }
+
+        int temp = queue[front];
+
+        // Verschieben Sie die verbleibenden Elemente nach vorne
+        System.arraycopy(queue, 1, queue, 0, rear--);
+
+        return temp;
     }
 
     public int getFront() {
-        return front;
+        if (isEmpty()) {
+            throw new IllegalStateException("Queue is empty");
+        }
+
+        return queue[front];
     }
 
     public int getRear() {
-        return rear;
+        if (isEmpty()) {
+            throw new IllegalStateException("Queue is empty");
+        }
+
+        return queue[rear];
     }
 
     @Override
     public String toString() {
-        return "MyQueue{}";
+        if (isEmpty()) {
+            return "MyQueue is empty";
+        }
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("MyQueue elements from front to rear: ");
+
+        for (int i = front; i <= rear; i++) {
+            sb.append(queue[i]);
+
+            if (i < rear) {
+                sb.append(", ");
+            }
+        }
+
+        return sb.toString();
     }
-
 }
-
-
